@@ -86,11 +86,19 @@ public class Pictures extends LinearOpMode
                     .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
                     .setCameraResolution(new Size(RESOLUTION_WIDTH, RESOLUTION_HEIGHT))
                     .build();
+            portal2 = new VisionPortal.Builder()
+                    .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+                    .setCameraResolution(new Size(RESOLUTION_WIDTH, RESOLUTION_HEIGHT))
+                    .build();
         }
         else
         {
             portal = new VisionPortal.Builder()
                     .setCamera(INTERNAL_CAM_DIR)
+                    .setCameraResolution(new Size(RESOLUTION_WIDTH, RESOLUTION_HEIGHT))
+                    .build();
+            portal2 = new VisionPortal.Builder()
+                    .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
                     .setCameraResolution(new Size(RESOLUTION_WIDTH, RESOLUTION_HEIGHT))
                     .build();
         }
