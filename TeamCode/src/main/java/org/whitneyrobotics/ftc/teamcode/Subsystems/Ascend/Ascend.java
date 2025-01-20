@@ -1,91 +1,49 @@
-// Written By Anik Koirala and Derek Luc
+// Written by: Anik Koirala & Derek Luc
+// Refactored by: Christopher Gholmieh
+
 // Package:
 package org.whitneyrobotics.ftc.teamcode.Subsystems.Ascend;
 
+
 // Imports:
+import org.whitneyrobotics.ftc.teamcode.Library.Subsystem.Subsystem;
+import org.whitneyrobotics.ftc.teamcode.Library.Channel.Channel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.whitneyrobotics.ftc.teamcode.Library.Subsystem.Subsystem;
-import org.whitneyrobotics.ftc.teamcode.Library.Channel.Channel;
 
-// Class:
+// Ascend:
 public class Ascend implements Subsystem {
     // Variables (Declaration):
-    // Left and Right Vertical Linear Slides:
-    protected DcMotor left_vertical_linear_slides, right_vertical_linear_slides;
+    // Slides:
+    public DcMotor right_linear_slide, left_linear_slide;
 
-    // Variables (Assignment):
-    // Status:
-    public Status internal_status = Status.OPEN;
-
-    // Toggle:
-    public boolean toggle = true;
-
-    // Enumerations:
-    // Power:
-    public enum Power {
-        // Down:
-        ASCEND_DOWN(0.0),
-
-        // Up:
-        ASCEND_UP (1.0);
-
-        // Fields:
-        public final double power;
-
-        // Constructor:
-        Power(double power) {
-            this.power = power;
-        }
-    }
-
-    // Status:
-    public enum Status {
-        CLOSED, OPEN;
-    }
-
-    // Constructor
+    // Constructor:
     public Ascend(HardwareMap hardware_map) {
-        // Variables (Definition):
-        left_vertical_linear_slides = hardware_map.get(DcMotor.class, "left_vertical_linear_slides");
-        right_vertical_linear_slides = hardware_map.get(DcMotor.class, "right_vertical_linear_slides");
+        // Variables (Assignment):
+        // Slides:
+        right_linear_slide = hardware_map.get(DcMotor.class, "right-vertical-slide");
+        left_linear_slide = hardware_map.get(DcMotor.class, "left-vertical-slide");
     }
 
     // Methods:
-    public void set_power(Power Power) {
-        left_vertical_linear_slides.setPower(Power.power);
-        right_vertical_linear_slides.setPower(Power.power);
+    private void set_power(double power) {
+        // Slides:
+        // Right:
+        right_linear_slide.setPower(power);
+
+        // Left:
+        left_linear_slide.setPower(power);
     }
 
     @Override
     public void update(Channel channel) {
-        // Toggle Switch:
-        if (channel.gamepad_two_options) {
-            toggle = !toggle;
-        }
-        // Logic:
-        if (toggle) {
-            internal_status = Status.CLOSED;
-
-            set_power(Power.ASCEND_DOWN);
-        } else {
-            internal_status = Status.OPEN;
-
-            set_power(Power.ASCEND_UP);
+        // Verification:
+        if (!channel.gamepad_two_options)  {
+            set_power(0.0);
         }
 
         // Logic:
-        switch (internal_status) {
-            case CLOSED:
-                set_power(Power.ASCEND_DOWN);
-                break
-            case OPEN:
-                set_power(Power.ASCEND_UP);
-        }
-
-
+        set_power(-channel.gamepad_two_left_stick_y);
     }
-
-
 }

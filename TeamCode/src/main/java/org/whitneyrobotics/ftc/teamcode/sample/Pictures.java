@@ -80,6 +80,7 @@ public class Pictures extends LinearOpMode
     {
         VisionPortal portal;
 
+        VisionPortal portal2;
         if (USING_WEBCAM)
         {
             portal = new VisionPortal.Builder()
