@@ -6,6 +6,7 @@ package org.whitneyrobotics.ftc.teamcode.Subsystems;
 // Imports:
 import org.whitneyrobotics.ftc.teamcode.Library.Subsystem.Subsystem;
 import org.whitneyrobotics.ftc.teamcode.Subsystems.Mecanum.Mecanum;
+import org.whitneyrobotics.ftc.teamcode.Subsystems.Ascend.Ascend;
 import org.whitneyrobotics.ftc.teamcode.Library.Channel.Channel;
 import org.whitneyrobotics.ftc.teamcode.Subsystems.Claw.Claw;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -19,6 +20,7 @@ public class Implementation implements Subsystem {
 
     // Subsystems:
     public Mecanum mecanum;
+    public Ascend ascend;
     public Claw claw;
 
     // Constructor:
@@ -26,6 +28,9 @@ public class Implementation implements Subsystem {
         // Variables (Definition):
         // Mecanum:
         mecanum = new Mecanum(hardware_map);
+
+        // Ascend:
+        ascend = new Ascend(hardware_map);
 
         // Claw:
         claw = new Claw(hardware_map);
@@ -43,6 +48,9 @@ public class Implementation implements Subsystem {
     public void update(Channel channel) {
         // Mecanum:
         mecanum.update(channel);
+
+        // Ascend:
+        ascend.update(channel);
 
         // Claw:
         claw.update(channel);
