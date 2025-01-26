@@ -43,6 +43,7 @@ public class WHSTeleOp extends OpModeEx {
         gamepad2.CROSS.onPress(e -> robot.intake.run());
         gamepad2.TRIANGLE.onPress(e -> robot.claw.run());
 
+
         UnaryOperator<Float> scaling = scalingFunctionDefault;
         if (!robot.drive.isBusy()) robot.drive.setWeightedDrivePower(
                 Functions.rotateVectorCounterclockwise(new Pose2d(
