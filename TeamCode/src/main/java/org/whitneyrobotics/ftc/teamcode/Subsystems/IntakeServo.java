@@ -16,6 +16,7 @@ public class IntakeServo {
 
     public enum intakeState{
         UP(0.8),
+        MID(0.5),
         DOWN(0.2);
 
         public double servoPosition;
@@ -30,7 +31,7 @@ public class IntakeServo {
 
 
     public void update(){
-        position = intakeState.values()[(position.ordinal() + 1) % 2];
+        position = intakeState.values()[(position.ordinal() + 1) % 3];
     }
 
     public void run(){

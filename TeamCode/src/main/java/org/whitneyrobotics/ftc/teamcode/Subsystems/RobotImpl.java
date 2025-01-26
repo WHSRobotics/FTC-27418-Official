@@ -55,6 +55,7 @@ public class RobotImpl {
     public void switchAlliance(){
         alliance = alliance == Alliance.RED ? Alliance.BLUE : Alliance.RED;
     }
+
     public void teleOpInit(){
         Pose2d poseMemory = localizer.getPoseEstimate();
 
